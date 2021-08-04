@@ -1,15 +1,16 @@
 BEGIN;
-DROP TABLE IF EXISTS user, lead, lead_comment CASCADE;
-
-CREATE TABLE user(
+DROP TABLE IF EXISTS admin, lead, lead_comment CASCADE;
+-- signin and signup this is a users tabel
+CREATE TABLE admin (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    signup_date DATE NOT NULL DEFAULT CURRENT_DATE
-)
+    signupdate DATE NOT NULL DEFAULT CURRENT_DATE
+);
 
-CREATE TABLE lead(
+-- this is seacrets table
+CREATE TABLE lead (
     id SERIAL PRIMARY KEY,
     fullname VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
@@ -18,14 +19,15 @@ CREATE TABLE lead(
     status VARCHAR(255) NOT NULL,
     story TEXT,
     submit DATE NOT NULL DEFAULT CURRENT_DATE
-)
+);
 
-CREATE TABLE lead_comment(
+-- this history table
+CREATE TABLE lead_comment (
     id SERIAL PRIMARY KEY,
     userid INTEGER REFERENCES lead(id),
     story TEXT,
     submit DATE NOT NULL DEFAULT CURRENT_DATE
-)
+);
 
 
 COMMIT;
